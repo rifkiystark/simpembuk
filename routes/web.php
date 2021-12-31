@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::group(["middleware" => ["auth"]], function () {
+    Route::get("books", [BookController::class, "showBook"]);
+    Route::get("books/detail", [BookController::class, "showDetailBook"]);
+});
+
+require __DIR__.'/auth.php';
