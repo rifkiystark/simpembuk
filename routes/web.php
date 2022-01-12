@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowController;
+use App\Http\Controllers\LibrarianController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +28,13 @@ Route::get('/dashboard', function () {
 Route::group(["middleware" => ["auth"]], function () {
     Route::get("books", [BookController::class, "showBook"]);
     Route::get("books/detail", [BookController::class, "showDetailBook"]);
+
+    Route::get("students", [StudentController::class, "showStudent"]);
+    Route::get("students/detail", [StudentController::class, "showDetailStudent"]);
+
+    Route::get("librarians", [LibrarianController::class, "showLibrarian"]);
+   
+    Route::get("book-borrow", [BorrowController::class, "showBookBorrow"]);
 });
 
 require __DIR__.'/auth.php';
