@@ -36,6 +36,7 @@ Route::group(["middleware" => ["auth"]], function () {
 
     Route::group(["prefix" => "students"], function(){
         Route::get("/", [StudentController::class, "showStudent"]);
+        Route::post("/", [StudentController::class, "addStudent"]);
         Route::post("/import", [StudentController::class, "importStudents"]);
         Route::post("/{id}", [StudentController::class, "editStudent"]);
         Route::post("/delete/{id}", [StudentController::class, "deleteStudent"]);

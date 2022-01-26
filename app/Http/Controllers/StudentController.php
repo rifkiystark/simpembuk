@@ -26,6 +26,16 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
+    public function addStudent(Request $request)
+    {
+        $student = new Student();
+        $student->nim = $request->nim;
+        $student->name = $request->name;
+        $student->save();
+
+        return redirect()->back();
+    }
+
     public function deleteStudent(Request $request, $id)
     {
         $user = auth()->user();

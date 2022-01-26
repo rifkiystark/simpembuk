@@ -183,20 +183,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">NIM</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
+                <form action="{{url('/students/')}}" method="post" id="formAdd">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">NIM</label>
+                        <input type="text" class="form-control" name="nim" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="name" required />
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                     Batal
                 </a>
-                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                <button class="btn btn-primary ms-auto" type="submit" form="formAdd">
                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -204,7 +207,7 @@
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                     Tambah
-                </a>
+                </button>
             </div>
         </div>
     </div>
