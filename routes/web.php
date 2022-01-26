@@ -26,8 +26,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(["middleware" => ["auth"]], function () {
-    Route::get("books", [BookController::class, "showBook"]);
-    Route::get("books/detail", [BookController::class, "showDetailBook"]);
+    Route::group(["prefix" => "books"], function() {
+        Route::get("/", [BookController::class, "showBook"]);
+        Route::post("/", [BookController::class, "postBook"]);
+        Route::get("/detail/{id}", [BookController::class, "showDetailBook"]);
+    });
 
     Route::get("students", [StudentController::class, "showStudent"]);
     Route::get("students/detail", [StudentController::class, "showDetailStudent"]);

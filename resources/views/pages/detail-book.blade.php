@@ -62,56 +62,49 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-
             <div class="row row-cards">
                 <div class="col-md-12 col-sm-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-2 col-sm-12 text-center">
-                                    <img src="https://cdn.storial.co/book_front/RPJL-Dig_2.0+logo.jpg" alt="" class="img img-fluid mb-2" style="max-width: 50vw;width: 100%;">
+                                    <img src="{{asset('/cover/'.$book->cover)}}" alt="" class="img img-fluid mb-2" style="max-width: 50vw;width: 100%;">
                                 </div>
                                 <div class="col-md-10 col-sm-12">
-                                    <h2>Rapjali And Adfenture</h2>
+                                    <h2>{{$book->title}}</h2>
                                     <h4 class="mb-0">Sinopsis</h4>
                                     <p>
-                                        Jakarta tidak lagi menjadi penjara. Di ibu kota, Ping justru mulai mendapatkan gambaran tentang hidup yang ia inginkan. Ia memiliki sahabat-sahabat baru, impian baru, dan cinta yang baru. Namun, tantangan lebih besar turut menyingsing. Ajang Band Idola Indonesia menuntut Ping bekerja keras, termasuk menciptakan lagu. Band Rapijali yang menjadi sumber kebahagiaannya ikut menerbitkan beragam konflik. Popularitas mereka mulai terasa bagai pisau bermata dua. Berbagai perasaan yang terpendam di antara para personel Rapijali turut membayangi perjalanan terjal mereka sepanjang kompetisi.
-                                        Cita-cita Ping untuk melanjutkan pendidikan di universitas impian berbenturan dengan kelemahan terbesarnya di bidang musik. Sementara itu, rahasia masa lalu yang mulai terkuak membawa keluarga Guntur ke titik kritis. Mampukah Ping melewati badai itu? Akankah Rapijali bertahan? Di persimpangan hatinya, kepada siapakah Ping menjatuhkan pilihan?
+                                        {{$book->synopsis}}
                                     </p>
                                     <div class="row">
                                         <div class="col-md-3 col-6">
                                             <h4 class="mb-0">Kode Buku</h4>
                                             <p>
-                                                BK123
+                                                {{$book->book_code}}
                                             </p>
                                         </div>
                                         <div class="col-md-3 col-6">
                                             <h4 class="mb-0">Pengarang</h4>
                                             <p>
-                                                Jaka Sembung
+                                                {{$book->author}}
                                             </p>
                                         </div>
                                         <div class="col-md-3 col-6">
                                             <h4 class="mb-0">Penerbit</h4>
                                             <p>
-                                                Sincan
+                                                {{$book->publisher}}
                                             </p>
                                         </div>
                                         <div class="col-md-3 col-6">
                                             <h4 class="mb-0">Tahun Terbit</h4>
                                             <p>
-                                                2019
+                                                {{$book->publish_year}}
                                             </p>
                                         </div>
                                     </div>
-
-
-
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-12">
