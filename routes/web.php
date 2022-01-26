@@ -34,8 +34,14 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/detail/{id}", [BookController::class, "showDetailBook"]);
     });
 
-    Route::get("students", [StudentController::class, "showStudent"]);
-    Route::get("students/detail", [StudentController::class, "showDetailStudent"]);
+    Route::group(["prefix" => "students"], function(){
+        Route::get("/", [StudentController::class, "showStudent"]);
+        Route::post("/import", [StudentController::class, "importStudents"]);
+        Route::post("/{id}", [StudentController::class, "editStudent"]);
+        Route::post("/delete/{id}", [StudentController::class, "deleteStudent"]);
+        Route::get("/detail", [StudentController::class, "showDetailStudent"]);
+    });
+
 
     Route::get("librarians", [LibrarianController::class, "showLibrarian"]);
    
