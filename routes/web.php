@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(["middleware" => ["auth"]], function () {
-    Route::group(["prefix" => "books"], function() {
+    Route::group(["prefix" => "books"], function () {
         Route::get("/", [BookController::class, "showBook"]);
         Route::post("/", [BookController::class, "postBook"]);
         Route::post("/{id}", [BookController::class, "updateBook"]);
@@ -34,7 +34,7 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/detail/{id}", [BookController::class, "showDetailBook"]);
     });
 
-    Route::group(["prefix" => "students"], function(){
+    Route::group(["prefix" => "students"], function () {
         Route::get("/", [StudentController::class, "showStudent"]);
         Route::post("/", [StudentController::class, "addStudent"]);
         Route::post("/import", [StudentController::class, "importStudents"]);
@@ -43,10 +43,14 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/detail", [StudentController::class, "showDetailStudent"]);
     });
 
+    Route::group(["prefix" => "librarians"], function () {
+        Route::get("/", [LibrarianController::class, "showLibrarian"]);
+        Route::post("/", [LibrarianController::class, "addLibrarian"]);
+        Route::post("/{id}", [LibrarianController::class, "editLibrarian"]);
+        Route::post("/delete/{id}", [LibrarianController::class, "deleteLibrarian"]);
+    });
 
-    Route::get("librarians", [LibrarianController::class, "showLibrarian"]);
-   
     Route::get("book-borrow", [BorrowController::class, "showBookBorrow"]);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
