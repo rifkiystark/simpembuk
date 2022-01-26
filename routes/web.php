@@ -44,13 +44,18 @@ Route::group(["middleware" => ["auth"]], function () {
     });
 
     Route::group(["prefix" => "librarians"], function () {
-        Route::get("/", [LibrarianController::class, "showLibrarian"]);
+    Route::get("/", [LibrarianController::class, "showLibrarian"]);
         Route::post("/", [LibrarianController::class, "addLibrarian"]);
         Route::post("/{id}", [LibrarianController::class, "editLibrarian"]);
         Route::post("/delete/{id}", [LibrarianController::class, "deleteLibrarian"]);
     });
 
-    Route::get("book-borrow", [BorrowController::class, "showBookBorrow"]);
+    Route::group(["prefix" => "book-borrow"], function(){
+        Route::get("/", [BorrowController::class, "showBookBorrow"]);
+        Route::post("/borrow", [BorrowController::class, "borrow"]);
+        Route::post("/return", [BorrowController::class, "return"]);
+    });
+
 });
 
 require __DIR__ . '/auth.php';

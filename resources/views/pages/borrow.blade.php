@@ -104,18 +104,21 @@
                                         <th>Nama Peminjam</th>
                                         <th>Tanggal Pinjam</th>
                                         <th>Tanggal Kembali</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($borrows as $index => $borrow)
                                     <tr>
-                                        <td>1</td>
-                                        <td>B-0021</td>
-                                        <td>Puisi Alam</td>
-                                        <td>Jalu</td>
-                                        <td>12 Maret 2021</td>
-
-
+                                        <td>{{$index+1}}</td>
+                                        <td>{{$borrow->borrow_code}}</td>
+                                        <td>{{$borrow->book->title}}</td>
+                                        <td>{{$borrow->student->name}}</td>
+                                        <td>{{$borrow->start_date}}</td>
+                                        <td>{{$borrow->end_date}}</td>
+                                        <td>{{$borrow->status?"Masih Dipinjam":"Sudah Kembali"}}</td>
                                     </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -135,31 +138,34 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kode Pinjam</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status Buku</label>
-                    <select name="" id="" class="form-select">
-                        <option value="">Baik</option>
-                        <option value="">Rusak</option>
-                    </select>
-                </div>
+                <form action="{{url('book-borrow/return/')}}" method="post" id="formReturn">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Kode Pinjam</label>
+                        <input type="text" class="form-control" name="borrow_code" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status Buku</label>
+                        <select name="status" id="" class="form-select">
+                            <option value="1">Baik</option>
+                            <option value="0">Rusak</option>
+                        </select>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                     Batal
                 </a>
-                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                <button class="btn btn-primary ms-auto" type="submit" form="formReturn">
+
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                     Kembalikan
-                </a>
+                </button>
             </div>
         </div>
     </div>
@@ -173,20 +179,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Kode Buku</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">NIM</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
+                <form action="{{url('/book-borrow/borrow/')}}" method="post" id="formBorrow">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Kode Buku</label>
+                        <input type="text" class="form-control" name="book_code" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">NIM</label>
+                        <input type="text" class="form-control" name="nim" required />
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                     Batal
                 </a>
-                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                <button class="btn btn-primary ms-auto" type="submit" form="formBorrow">
                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -194,7 +203,7 @@
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                     Pinjam
-                </a>
+                </button>
             </div>
         </div>
     </div>
