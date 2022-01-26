@@ -9,10 +9,29 @@ use Illuminate\Http\Request;
 
 class BorrowController extends Controller
 {
-    public function showBookBorrow()
+    public function showBookBorrow(Request $request)
     {
-        $borrows = Borrow::all();
-        return view("pages.borrow", compact("borrows"));
+        $student = $request->student??"";
+        $book = $request->book??"";
+        $start_date = $request->start_date??"";
+        $end_date = $request->end_date??"";
+        $borrows = Borrow::with("book");
+        if($student != ""){
+            $borrows->where("student_id", $student);
+        }
+        if($book != ""){
+            $borrows->where("book_code", $book);
+        }
+        if($start_date != ""){
+            $borrows->whereDate("start_date", ">=", $start_date);
+        }
+        if($end_date != ""){
+            $borrows->whereDate("end_date", "<=", $end_date);
+        }
+        $borrows = $borrows->get();
+        $students = Student::all();
+        $books = Book::all();
+        return view("pages.borrow", compact("borrows", "students", "books"));
     }
 
     public function borrow(Request $request)
@@ -45,7 +64,7 @@ class BorrowController extends Controller
 
         $borrow = Borrow::where("borrow_code", $borrow_code)->first();
 
-        if($borrow == null){
+        if ($borrow == null) {
             return redirect()->back();
         }
 
@@ -55,11 +74,10 @@ class BorrowController extends Controller
 
         $book = Book::where("book_code", $borrow->book_code)->first();
 
-        if($book != null){
+        if ($book != null) {
             $book->status = $status;
         }
 
         return redirect()->back();
-
     }
 }

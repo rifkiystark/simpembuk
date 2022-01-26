@@ -61,30 +61,34 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form class="form row" action="#" method="get">
-                                <div class="mb-3 col-md-2">
+                            <form class="form row" action="" method="get">
+                                <div class="mb-3 col-md-3">
                                     <label class="form-label">Nama Siswa</label>
-                                    <select class="form-select" name="" id="">
-                                        <option value="">Jalu</option>
-                                        <option value="">Jali</option>
+                                    <select class="form-select" name="student" id="">
+                                        <option value="">Semua</option>
+                                        @foreach($students as $student)
+                                        <option value="{{$student->id}}">{{$student->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-3 col-md-2">
+                                <div class="mb-3 col-md-3">
                                     <label class="form-label">Judul Buku</label>
-                                    <select class="form-select" name="" id="">
-                                        <option value="">Aku Disini</option>
-                                        <option value="">kau Disana</option>
+                                    <select class="form-select" name="book" id="">
+                                        <option value="">Semua</option>
+                                        @foreach($books as $book)
+                                        <option value="{{$book->book_code}}">{{$book->book_code}} - {{$book->title}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3 col-md-2">
                                     <label class="form-label">Tanggal Pinjam</label>
-                                    <input type="date" class="form-control" name="password">
+                                    <input type="date" class="form-control" name="start_date">
                                 </div>
                                 <div class="mb-3 col-md-2">
                                     <label class="form-label">Tanggal Kembali</label>
-                                    <input type="date" class="form-control" name="password">
+                                    <input type="date" class="form-control" name="end_date">
                                 </div>
-                                <div class="mb-3 col-md-4">
+                                <div class="mb-3 col-md-2">
                                     <label class="form-label">.</label>
                                     <button type="submit" class="btn btn-primary">Filter</button>
                                 </div>
