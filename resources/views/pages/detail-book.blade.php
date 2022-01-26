@@ -225,22 +225,27 @@
                 </svg>
                 <h3>Apa anda yakin?</h3>
                 <div class="text-muted mb-4">Semua data peminjaman juga akan terhapus.</div>
-                <form action="">
+                <form action="{{url('/books/delete/'.$book->id)}}" id="formDelete" method="post">
+                    @csrf
                     <div class="">
                         <label class="form-label">Masukan password anda</label>
-                        <input type="password" class="form-control" name="" />
+                        <input type="password" class="form-control" name="password" required />
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <div class="w-100">
                     <div class="row">
-                        <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
-                                Cancel
-                            </a></div>
-                        <div class="col"><a href="#" class="btn btn-danger w-100" data-bs-dismiss="modal">
-                                Delete 84 items
-                            </a></div>
+                        <div class="col">
+                            <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                Batal
+                            </a>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-danger w-100" type="submit" form="formDelete">
+                                Hapus
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
