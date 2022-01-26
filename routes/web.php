@@ -30,6 +30,7 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("/", [BookController::class, "showBook"]);
         Route::post("/", [BookController::class, "postBook"]);
         Route::post("/{id}", [BookController::class, "updateBook"]);
+        Route::delete("/{id}", [BookController::class, "deleteBook"]);
         Route::get("/detail/{id}", [BookController::class, "showDetailBook"]);
     });
 

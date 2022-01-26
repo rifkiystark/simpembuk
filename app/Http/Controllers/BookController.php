@@ -41,6 +41,29 @@ class BookController extends Controller
 
         return redirect("/books/detail/" . $id);
     }
+    
+    public function deleteBook(Request $request, $id)
+    {
+        $user = auth()->user();
+        $book = Book::find($id);
+        if ($request->hasFile("cover")) {
+            $file = $request->file('cover');
+            $tujuan_upload = 'cover'; //nama folder
+            $coverFile = md5(time());
+            $coverFile = 'cover-' . $coverFile . '.' . $file->getClientOriginalExtension();
+            $file->move($tujuan_upload, $coverFile);
+            $book->cover = $coverFile;
+        }
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->publish_year = $request->publish_year;
+        $book->synopsis = $request->synopsis;
+        $book->status = $request->status;
+        $book->save();
+
+        return redirect("/books/detail/" . $id);
+    }
 
     public function postBook(Request $request)
     {
