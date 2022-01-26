@@ -29,6 +29,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::group(["prefix" => "books"], function() {
         Route::get("/", [BookController::class, "showBook"]);
         Route::post("/", [BookController::class, "postBook"]);
+        Route::post("/{id}", [BookController::class, "updateBook"]);
         Route::get("/detail/{id}", [BookController::class, "showDetailBook"]);
     });
 

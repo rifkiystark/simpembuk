@@ -154,46 +154,50 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Judul</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Pengarang</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Penerbit</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Tahun Terbit</label>
-                    <input type="text" class="form-control" name="" />
-                </div>
+                <form action="{{url('/books/'.$book->id)}}" method="post" enctype="multipart/form-data" id="addBook">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Judul</label>
+                        <input type="text" class="form-control" required value="{{$book->title}}" name="title" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pengarang</label>
+                        <input type="text" class="form-control" required value="{{$book->author}}" name="author" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Penerbit</label>
+                        <input type="text" class="form-control" required value="{{$book->publisher}}" name="publisher" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tahun Terbit</label>
+                        <input type="text" class="form-control" required value="{{$book->publish_year}}" name="publish_year" />
+                    </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Sinopsis</label>
-                    <textarea class="form-control" rows="5"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Sampul</label>
-                    <input type="file" class="form-control" name="" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Status</label>
-                    <select name="" id="" class="form-select">
-                        <option value="baik">Baik</option>
-                        <option value="rusak">Rusak</option>
-                    </select>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sinopsis</label>
+                        <textarea class="form-control" rows="5" required name="synopsis">{{$book->synopsis}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sampul</label>
+                        <input type="file" class="form-control" name="cover" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="" class="form-select" required>
+                            <option value="">Pilih status</option>
+                            <option value="1">Baik</option>
+                            <option value="0">Rusak</option>
+                        </select>
+                    </div>
 
+                </form>
 
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                     Batal
                 </a>
-                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                <button type="submit " class="btn btn-primary ms-auto" form="addBook">
                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -201,7 +205,7 @@
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
                     Perbarui
-                </a>
+                </button>
             </div>
         </div>
     </div>
